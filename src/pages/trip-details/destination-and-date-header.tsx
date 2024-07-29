@@ -28,9 +28,9 @@ export function DestinationAndDateHeader({
   }, [tripId]);
 
   const displayedDate = trip
-    ? format(trip.starts_at, "d' de 'LLL")
-        .concat(" até ")
-        .concat(format(trip.ends_at, "d' de 'LLL"))
+    ? format(trip.starts_at, "d' of 'LLL")
+        .concat(" to ")
+        .concat(format(trip.ends_at, "d' of 'LLL"))
     : null;
 
   return (
@@ -49,7 +49,7 @@ export function DestinationAndDateHeader({
         <div className="w-px h-6 bg-zinc-800" />
 
         <Button onClick={openUpdateTripModal} variant="secondary">
-          Alterar local/data
+          Change destination/date
           <Settings2 className="size-5" />
         </Button>
       </div>

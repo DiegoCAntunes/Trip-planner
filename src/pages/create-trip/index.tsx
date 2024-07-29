@@ -8,103 +8,104 @@ import { DateRange } from "react-day-picker";
 import { api } from "../../lib/axios";
 
 export function CreateTripPage() {
-  const navigate = useNavigate()
-  const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
-  const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
-  const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
+  const navigate = useNavigate();
+  const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false);
+  const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false);
+  const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false);
   const [emailsToInvite, setEmailsToInvite] = useState([
-    'diego@rocketseat.com.br',
-    'john@acme.com'
-  ])
+    "diego@rocketseat.com.br",
+    "john@acme.com",
+  ]);
 
-  const [destination, setDestination] = useState('')
-  const [ownerName, setOwnerName] = useState('')
-  const [ownerEmail, setOwnerEmail] = useState('')
-  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<DateRange | undefined>()
+  const [destination, setDestination] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerEmail, setOwnerEmail] = useState("");
+  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
+    DateRange | undefined
+  >();
 
   function openGuestsInput() {
-    setIsGuestsInputOpen(true)
+    setIsGuestsInputOpen(true);
   }
 
   function closeGuestsInput() {
-    setIsGuestsInputOpen(false)
+    setIsGuestsInputOpen(false);
   }
 
   function openGuestsModal() {
-    setIsGuestsModalOpen(true)
+    setIsGuestsModalOpen(true);
   }
 
   function closeGuestsModal() {
-    setIsGuestsModalOpen(false)
+    setIsGuestsModalOpen(false);
   }
 
   function openConfirmTripModal() {
-    setIsConfirmTripModalOpen(true)
+    setIsConfirmTripModalOpen(true);
   }
 
   function closeConfirmTripModal() {
-    setIsConfirmTripModalOpen(false)
+    setIsConfirmTripModalOpen(false);
   }
 
   function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const data = new FormData(event.currentTarget)
-    const email = data.get('email')?.toString()
+    const data = new FormData(event.currentTarget);
+    const email = data.get("email")?.toString();
 
     if (!email) {
-      return
+      return;
     }
 
     if (emailsToInvite.includes(email)) {
-      return
+      return;
     }
 
-    setEmailsToInvite([
-      ...emailsToInvite,
-      email
-    ])
+    setEmailsToInvite([...emailsToInvite, email]);
 
-    event.currentTarget.reset()
+    event.currentTarget.reset();
   }
 
   function removeEmailFromInvites(emailToRemove: string) {
-    const newEmailList = emailsToInvite.filter(email => email !== emailToRemove)
+    const newEmailList = emailsToInvite.filter(
+      (email) => email !== emailToRemove
+    );
 
-    setEmailsToInvite(newEmailList)
+    setEmailsToInvite(newEmailList);
   }
 
   async function createTrip(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (!destination) {
-      return
+      return;
     }
 
     if (!eventStartAndEndDates?.from || !eventStartAndEndDates?.to) {
-      return
+      return;
     }
 
     if (emailsToInvite.length === 0) {
-      return
+      return;
     }
 
     if (!ownerName || !ownerEmail) {
-      return
+      return;
     }
 
-    const response = await api.post('/trips', {
+    const response = await api.post("/trips", {
       destination,
       starts_at: eventStartAndEndDates.from,
       ends_at: eventStartAndEndDates.to,
       emails_to_invite: emailsToInvite,
       owner_name: ownerName,
-      owner_email: ownerEmail
-    })
+      owner_email: ownerEmail,
+    });
 
-    const { tripId } = response.data
+    const { tripId } = response.data;
 
-    navigate(`/trips/${tripId}`)
+    navigate(`/trips/${tripId}`);
   }
 
   return (
@@ -113,12 +114,12 @@ export function CreateTripPage() {
         <div className="flex flex-col items-center gap-3">
           <img src="/logo.svg" alt="plann.er" />
           <p className="text-zinc-300 text-lg">
-            Convide seus amigos e planeje sua próxima viagem!
+            Invite your friends and plan your next trip!
           </p>
         </div>
 
         <div className="space-y-4">
-          <DestinationAndDateStep 
+          <DestinationAndDateStep
             closeGuestsInput={closeGuestsInput}
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
@@ -128,7 +129,7 @@ export function CreateTripPage() {
           />
 
           {isGuestsInputOpen && (
-            <InviteGuestsStep 
+            <InviteGuestsStep
               emailsToInvite={emailsToInvite}
               openConfirmTripModal={openConfirmTripModal}
               openGuestsModal={openGuestsModal}
@@ -137,13 +138,21 @@ export function CreateTripPage() {
         </div>
 
         <p className="text-sm text-zinc-500">
-          Ao planejar sua viagem pela plann.er você automaticamente concorda <br />
-          com nossos <a className="text-zinc-300 underline" href="#">termos de uso</a> e <a className="text-zinc-300 underline" href="#">políticas de privacidade</a>.
+          Planning your trip with plann.er you agree with <br />
+          our{" "}
+          <a className="text-zinc-300 underline" href="#">
+            terms of use
+          </a>{" "}
+          and{" "}
+          <a className="text-zinc-300 underline" href="#">
+            privacy
+          </a>
+          .
         </p>
       </div>
 
       {isGuestsModalOpen && (
-        <InviteGuestsModal 
+        <InviteGuestsModal
           emailsToInvite={emailsToInvite}
           addNewEmailToInvite={addNewEmailToInvite}
           closeGuestsModal={closeGuestsModal}
@@ -152,7 +161,7 @@ export function CreateTripPage() {
       )}
 
       {isConfirmTripModalOpen && (
-        <ConfirmTripModal 
+        <ConfirmTripModal
           closeConfirmTripModal={closeConfirmTripModal}
           createTrip={createTrip}
           setOwnerName={setOwnerName}

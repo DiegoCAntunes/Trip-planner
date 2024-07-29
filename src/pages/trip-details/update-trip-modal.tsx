@@ -63,9 +63,7 @@ export function UpdateTripModal({
       <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">
-              Atualizar informações da viagem
-            </h2>
+            <h2 className="font-lg font-semibold">Update trip information</h2>
             <button>
               <X
                 className="size-5 text-zinc-400"
@@ -80,7 +78,7 @@ export function UpdateTripModal({
             <MapPin className="text-zinc-400 size-5" />
             <input
               name="destination"
-              placeholder="Qual o local da viagem?"
+              placeholder="What's the destination?"
               className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
             />
           </div>
@@ -92,7 +90,7 @@ export function UpdateTripModal({
               className="flex items-center gap-2 text-left w-[240px]"
             >
               <span className="text-lg text-zinc-400 w-40 flex-1">
-                {displayedDate || "Quando"}
+                {displayedDate || "When"}
               </span>
             </button>
 
@@ -101,9 +99,7 @@ export function UpdateTripModal({
                 <div className="rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <h2 className="font-lg font-semibold">
-                        Selecione a data
-                      </h2>
+                      <h2 className="font-lg font-semibold">Select the date</h2>
                       <button>
                         <X
                           className="size-5 text-zinc-400"
@@ -124,7 +120,7 @@ export function UpdateTripModal({
           </div>
 
           <Button type="submit" size="full">
-            Atualizar viagem
+            Update trip
           </Button>
         </form>
       </div>

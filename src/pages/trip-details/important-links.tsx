@@ -25,7 +25,7 @@ export function ImportantLinks({ openCreateLinkModal }: CreateLinkModalProps) {
   }, [tripId]);
   return (
     <div className="space-y-6">
-      <h2 className="font-semibold text-xl">Links importantes</h2>
+      <h2 className="font-semibold text-xl">Trip Links</h2>
       <div className="space-y-5">
         {links.map((link) => {
           return (
@@ -53,7 +53,7 @@ export function ImportantLinks({ openCreateLinkModal }: CreateLinkModalProps) {
 
       <Button variant="secondary" size="full" onClick={openCreateLinkModal}>
         <Plus className="size-5" />
-        Cadastrar novo link
+        Create new link
       </Button>
     </div>
   );
