@@ -1,4 +1,4 @@
-# Travel Planner :partly_sunny:
+# Travel Planner :luggage:
 
 A desktop website to create travel plans with friends, register activities, and save useful links.
 
@@ -13,8 +13,8 @@ A desktop website to create travel plans with friends, register activities, and 
 - [License](#license)
 
 ## Screenshots
-![Screenshot 1](/public/screenshot2.png)
-![Screenshot 2](/public/screenshot1.png)
+![Screenshot 1](/public/Screenshot2.png)
+![Screenshot 2](/public/Screenshot1.png)
 
 ## Features
 - Create and manage travel plans
